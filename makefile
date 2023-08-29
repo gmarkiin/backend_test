@@ -62,6 +62,9 @@ migration: ## Create migration file
 migrate: ## Perform migrations
 	docker compose exec --user application nginx php artisan migrate
 
+createTest: ## Create test file
+	docker compose exec --user application nginx bash -c "php artisan make:test $(name)"
+
 fresh: ## Perform migrations
 	docker compose exec --user application nginx php artisan migrate:fresh
 
@@ -70,6 +73,10 @@ rollback: ## Rollback migration
 
 backup: ## Export database
 	docker compose exec mysql bash -c "/var/www/app/.scripts/backup.sh"
+##@ Database tools
+
+model: ## Create migration file
+	docker compose exec --user application nginx bash -c "php artisan make:model $(name)"
 
 ##@ Composer
 
